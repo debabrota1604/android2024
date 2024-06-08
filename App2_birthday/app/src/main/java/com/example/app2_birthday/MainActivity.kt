@@ -28,13 +28,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             App2_birthdayTheme {
-                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    GreetingText(message = "Happy Birthday Deb!", from = "From Sampa...")
-//                }
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     GreetingText(message = "Happy Birthday Deb!", from = "From Sampa...", modifier = Modifier.padding(8.dp))
                 }
@@ -43,13 +36,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
 
 @Composable
     fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
@@ -75,6 +61,5 @@ class MainActivity : ComponentActivity() {
 fun BirthdayPreview() {
     App2_birthdayTheme {
         GreetingText(message = "Happy Birthday Deb!", from ="From Sampa")
-//        Greeting("Android")
     }
 }
