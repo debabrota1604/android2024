@@ -49,9 +49,32 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun GreetingImage(textMessage: String, textSender: String, modifier: Modifier = Modifier){
+    val image = painterResource(R.drawable.androidparty)
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) { // Key change 1
+        Image(
+            painter = image,
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize() // Key change 2: Make image fill the Box
+        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally, // Key change 3
+            verticalArrangement = Arrangement.Center // Key change 4: Center vertically
+        ) {
+            GreetingText(
+                msg = textMessage,
+                sender = textSender,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+    }
+}
+
+@Composable
 fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
-    Column (
-        verticalArrangement = Arrangement.Center){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally // Key change 3 (also apply here)
+    ) {  // Remove verticalArrangement from here. It's handled in the parent Box.
         Text(
             text = "Hello $msg!",
             textAlign = TextAlign.Center,
@@ -62,25 +85,8 @@ fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
             text="from $sender...",
             color = Color.Gray,
             modifier = Modifier
-                .padding(10.dp)
-                .align(alignment = Alignment.End),
+                .padding(10.dp), // Removed .align(Alignment.End)
             fontSize = 15.sp
-        )
-    }
-}
-@Composable
-fun GreetingImage(textMessage: String, textSender: String, modifier: Modifier = Modifier){
-    val image = painterResource(R.drawable.androidparty);
-    Box(modifier){
-        Image(
-            painter = image,
-            contentDescription = null
-        )
-        GreetingText(
-            msg = textMessage,
-            sender = textSender,
-            modifier = Modifier
-                .padding(8.dp)
         )
     }
 }
