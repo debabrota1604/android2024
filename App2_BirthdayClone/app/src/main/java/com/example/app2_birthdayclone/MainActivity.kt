@@ -49,6 +49,27 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally // Key change 3 (also apply here)
+    ) {  // Remove verticalArrangement from here. It's handled in the parent Box.
+        Text(
+            text = "Hello $msg!",
+            textAlign = TextAlign.Center,
+            lineHeight = 50.sp,
+            fontSize = 30.sp
+        )
+        Text(
+            text="from $sender...",
+            color = Color.Gray,
+            modifier = Modifier
+                .padding(10.dp), // Removed .align(Alignment.End)
+            fontSize = 15.sp
+        )
+    }
+}
+
+@Composable
 fun GreetingImage(textMessage: String, textSender: String, modifier: Modifier = Modifier){
     val image = painterResource(R.drawable.androidparty)
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) { // Key change 1
@@ -67,27 +88,6 @@ fun GreetingImage(textMessage: String, textSender: String, modifier: Modifier = 
                 modifier = Modifier.padding(8.dp)
             )
         }
-    }
-}
-
-@Composable
-fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally // Key change 3 (also apply here)
-    ) {  // Remove verticalArrangement from here. It's handled in the parent Box.
-        Text(
-            text = "Hello $msg!",
-            textAlign = TextAlign.Center,
-            lineHeight = 50.sp,
-            fontSize = 30.sp
-        )
-        Text(
-            text="from $sender...",
-            color = Color.Gray,
-            modifier = Modifier
-                .padding(10.dp), // Removed .align(Alignment.End)
-            fontSize = 15.sp
-        )
     }
 }
 
