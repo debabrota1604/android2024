@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -51,8 +52,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally // Key change 3 (also apply here)
-    ) {  // Remove verticalArrangement from here. It's handled in the parent Box.
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = "Hello $msg!",
             textAlign = TextAlign.Center,
@@ -63,7 +64,7 @@ fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
             text="from $sender...",
             color = Color.Gray,
             modifier = Modifier
-                .padding(10.dp), // Removed .align(Alignment.End)
+                .padding(10.dp),
             fontSize = 15.sp
         )
     }
@@ -72,15 +73,17 @@ fun GreetingText(msg: String, sender: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingImage(textMessage: String, textSender: String, modifier: Modifier = Modifier){
     val image = painterResource(R.drawable.androidparty)
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) { // Key change 1
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Image(
             painter = image,
             contentDescription = null,
-            modifier = Modifier.fillMaxSize() // Key change 2: Make image fill the Box
+            contentScale = ContentScale.Crop,
+            alpha = 0.3F,
+            modifier = Modifier.fillMaxSize()
         )
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally, // Key change 3
-            verticalArrangement = Arrangement.Center // Key change 4: Center vertically
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             GreetingText(
                 msg = textMessage,
